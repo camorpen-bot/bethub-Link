@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="BetHub — systematic betting communities, premium tips and racing futures through Discord." />
+  <title>BetHub | Bet Smarter. Bet Systematically.</title>
+  <style>
+    :root{
+      --blue:#55b8ee;
+      --blue-2:#2f9fe0;
+      --white:#f7fbff;
+      --muted:#a8b3bf;
+      --bg:#05070a;
+      --panel:#0c1117;
+      --panel2:#101821;
+      --line:rgba(85,184,238,.28);
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 50% -10%,rgba(85,184,238,.16),transparent 38%),
+        linear-gradient(180deg,#05070a 0%,#070b10 55%,#05070a 100%);
+      color:var(--white);line-height:1.5;
+    }
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,92%);margin:auto}
+    nav{
+      position:sticky;top:0;z-index:20;
+      backdrop-filter:blur(16px);
+      background:rgba(5,7,10,.78);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .nav-inner{height:78px;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo{height:46px;width:auto;display:block}
+    .nav-links{display:flex;gap:28px;align-items:center;font-size:14px;color:#cbd4dc}
+    .nav-links a:hover{color:var(--blue)}
+    .nav-cta{
+      background:var(--blue);color:#031018;font-weight:800;
+      padding:11px 18px;border-radius:10px;
+      box-shadow:0 8px 30px rgba(85,184,238,.2);
+    }
+    .hero{padding:105px 0 85px;text-align:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      border:1px solid var(--line);background:rgba(85,184,238,.07);
+      color:var(--blue);border-radius:999px;padding:7px 13px;
+      font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+      margin-bottom:25px;
+    }
+    .dot{width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 14px var(--blue)}
+    h1{font-size:clamp(48px,8vw,88px);line-height:.98;letter-spacing:-.055em;max-width:950px;margin:0 auto 24px}
+    h1 span{color:var(--blue)}
+    .hero p{max-width:670px;margin:auto;color:#aeb8c2;font-size:18px}
+    .hero-buttons{display:flex;justify-content:center;gap:13px;flex-wrap:wrap;margin-top:34px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:14px 22px;border-radius:11px;font-weight:800;font-size:14px;
+      border:1px solid rgba(255,255,255,.12);transition:.2s;
+    }
+    .btn-primary{background:var(--blue);color:#031018;border-color:var(--blue)}
+    .btn-secondary{background:#0d131a;color:#eaf2f8}
+    .btn:hover{transform:translateY(-2px)}
+    .stats{
+      display:grid;grid-template-columns:repeat(3,1fr);
+      max-width:780px;margin:65px auto 0;
+      border:1px solid rgba(255,255,255,.09);border-radius:16px;
+      background:rgba(255,255,255,.025);overflow:hidden;
+    }
+    .stat{padding:20px;border-right:1px solid rgba(255,255,255,.07)}
+    .stat:last-child{border-right:0}
+    .stat strong{display:block;font-size:24px;color:#fff}
+    .stat small{color:#8996a2}
+    section{padding:80px 0}
+    .section-head{text-align:center;margin-bottom:38px}
+    .section-head h2{font-size:clamp(32px,4vw,48px);letter-spacing:-.035em}
+    .section-head p{color:#929eaa;margin:10px auto 0;max-width:620px}
+    .tiers{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+    .card{
+      position:relative;padding:30px;border-radius:18px;
+      background:linear-gradient(145deg,rgba(17,24,32,.98),rgba(8,12,17,.98));
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 20px 60px rgba(0,0,0,.25);
+      transition:.22s;overflow:hidden;
+    }
+    .card:hover{transform:translateY(-5px);border-color:rgba(85,184,238,.45)}
+    .card.featured{border:1px solid var(--blue);box-shadow:0 20px 70px rgba(85,184,238,.12)}
+    .badge{
+      position:absolute;top:18px;right:18px;
+      color:#031018;background:var(--blue);font-size:11px;font-weight:900;
+      padding:6px 9px;border-radius:999px;text-transform:uppercase;letter-spacing:.08em
+    }
+    .tier-number{font-size:12px;font-weight:900;color:var(--blue);letter-spacing:.13em;text-transform:uppercase}
+    .card h3{font-size:28px;margin:8px 0 10px}
+    .card p{color:#9da9b4;min-height:48px}
+    .card ul{list-style:none;margin:22px 0 27px;display:grid;gap:10px;color:#d7dfe6;font-size:14px}
+    .card li::before{content:"✓";color:var(--blue);font-weight:900;margin-right:10px}
+    .card .btn{width:100%}
+    .features{
+      display:grid;grid-template-columns:repeat(3,1fr);gap:16px
+    }
+    .feature{
+      padding:27px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:#090e14
+    }
+    .icon{
+      width:42px;height:42px;border-radius:12px;display:grid;place-items:center;
+      background:rgba(85,184,238,.1);border:1px solid var(--line);
+      color:var(--blue);font-weight:900;margin-bottom:18px
+    }
+    .feature h3{margin-bottom:7px}
+    .feature p{color:#8e9aa6;font-size:14px}
+    .cta{
+      text-align:center;border:1px solid var(--line);border-radius:22px;
+      padding:62px 25px;background:
+      radial-gradient(circle at 50% 0%,rgba(85,184,238,.16),transparent 55%),#090e14;
+    }
+    .cta h2{font-size:clamp(34px,5vw,56px);letter-spacing:-.04em}
+    .cta p{color:#9ba7b2;max-width:590px;margin:12px auto 27px}
+    footer{border-top:1px solid rgba(255,255,255,.07);padding:30px 0;color:#6f7c88;font-size:13px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .footer-inner img{height:35px}
+    @media(max-width:760px){
+      .nav-links{display:none}
+      .hero{padding:75px 0 60px}
+      .stats,.tiers,.features{grid-template-columns:1fr}
+      .stat{border-right:0;border-bottom:1px solid rgba(255,255,255,.07)}
+      .stat:last-child{border-bottom:0}
+      section{padding:60px 0}
+      .footer-inner{flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a href="#"><img class="nav-logo" src="bethub-logo.png" alt="BetHub"></a>
+      <div class="nav-links">
+        <a href="#membership">Memberships</a>
+        <a href="#why">Why BetHub</a>
+        <a href="#join">Join</a>
+      </div>
+      <a class="nav-cta" href="#membership">View Access</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <div class="eyebrow"><span class="dot"></span> The BetHub Community</div>
+        <h1>Bet smarter.<br><span>Bet systematically.</span></h1>
+        <p>Access our betting communities, proven systems, elite strategies and racing futures through Discord — all in one place.</p>
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#membership">Explore Memberships</a>
+          <a class="btn btn-secondary" href="https://whop.com/bethub-8d28/tier-0-basic-access/" target="_blank" rel="noopener">Start Free</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><strong>4</strong><small>Access Levels</small></div>
+          <div class="stat"><strong>Discord</strong><small>Community Access</small></div>
+          <div class="stat"><strong>Systematic</strong><small>Betting Approach</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="membership">
+      <div class="container">
+        <div class="section-head">
+          <h2>Choose your level.</h2>
+          <p>Start where you are and unlock more of the BetHub ecosystem as you grow.</p>
+        </div>
+
+        <div class="tiers">
+          <article class="card">
+            <div class="tier-number">Tier 0</div>
+            <h3>Basic Access</h3>
+            <p>Get inside BetHub and start following the community.</p>
+            <ul>
+              <li>Weekly free tips</li>
+              <li>General community chat</li>
+              <li>Entry-level access to BetHub</li>
+            </ul>
+            <a class="btn btn-secondary" href="https://whop.com/bethub-8d28/tier-0-basic-access/" target="_blank" rel="noopener">Get Basic Access →</a>
+          </article>
+
+          <article class="card featured">
+            <div class="badge">Most Popular</div>
+            <div class="tier-number">Tier 1</div>
+            <h3>Premium Access</h3>
+            <p>Scale your betting with proven systems and premium access.</p>
+            <ul>
+              <li>Premium Discord access</li>
+              <li>Proven betting systems</li>
+              <li>Built for members ready to scale</li>
+            </ul>
+            <a class="btn btn-primary" href="https://whop.com/bethub-8d28/tier-1-premium-access/" target="_blank" rel="noopener">Get Premium Access →</a>
+          </article>
+
+          <article class="card">
+            <div class="tier-number">Tier 2</div>
+            <h3>Elite Group</h3>
+            <p>For members looking for a higher-level, non-promotional betting environment.</p>
+            <ul>
+              <li>Elite Discord group</li>
+              <li>Non-promo betting approach</li>
+              <li>Systematic betting focus</li>
+            </ul>
+            <a class="btn btn-secondary" href="https://whop.com/bethub-8d28/tier-2-elites/" target="_blank" rel="noopener">Enter Elite Group →</a>
+          </article>
+
+          <article class="card">
+            <div class="tier-number">Tier 2</div>
+            <h3>Racing Futures</h3>
+            <p>Full access to one of the most profitable areas in betting.</p>
+            <ul>
+              <li>Full Racing Futures access</li>
+              <li>Dedicated betting focus</li>
+              <li>Specialised racing opportunities</li>
+            </ul>
+            <a class="btn btn-secondary" href="https://whop.com/bethub-8d28/tier-2-racing-futures/" target="_blank" rel="noopener">Access Racing Futures →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="why">
+      <div class="container">
+        <div class="section-head">
+          <h2>Built for serious bettors.</h2>
+          <p>BetHub brings community, systems and specialised betting strategies together.</p>
+        </div>
+        <div class="features">
+          <div class="feature">
+            <div class="icon">01</div>
+            <h3>Systematic</h3>
+            <p>Move away from random bets and toward structured approaches designed around repeatable systems.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">02</div>
+            <h3>Community</h3>
+            <p>Connect with BetHub members through dedicated Discord communities and shared betting discussion.</p>
+          </div>
+          <div class="feature">
+            <div class="icon">03</div>
+            <h3>Specialised</h3>
+            <p>Unlock dedicated strategies including premium betting systems and Racing Futures.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="join">
+      <div class="container">
+        <div class="cta">
+          <h2>Ready to join BetHub?</h2>
+          <p>Start with free access or choose the membership that fits the way you want to bet.</p>
+          <div class="hero-buttons" style="margin-top:0">
+            <a class="btn btn-primary" href="https://whop.com/bethub-8d28/tier-0-basic-access/" target="_blank" rel="noopener">Start with Tier 0</a>
+            <a class="btn btn-secondary" href="#membership">Compare All Tiers</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <img src="bethub-logo.png" alt="BetHub">
+      <span>© 2026 BetHub. All rights reserved.</span>
+      <span>bethubau.co</span>
+    </div>
+  </footer>
+</body>
+</html>
